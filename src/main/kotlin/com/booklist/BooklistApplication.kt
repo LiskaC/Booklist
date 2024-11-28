@@ -1,4 +1,4 @@
-package com.booklist.booklist
+package com.booklist
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
