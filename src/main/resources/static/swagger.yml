@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  title: Booklist API
+  description: API documentation for the Booklist application
+  version: 1.0
+paths:
+  /books:
+    get:
+      summary: Returns the names of all books in the database
+      responses:
+        '200':
+          description: A list of all the book titles in the database
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /book:
+    get:
+      summary: Returns the name of a book if it is found in the database. This will be expanded with further data for the book (if found).
+      parameters:
+        - in: query
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The name of a book
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: "Book not found"
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Book not found"
+    post:
+      summary: Adds a new book to the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "The Leopard"
+              required:
+                - name
+      responses:
+        '201':
+          description: "Book added successfully"
+        '500':
+          description: "Failed to add book to the database"

@@ -10,3 +10,10 @@ spring:
       maximum-pool-size: 10
   jooq:
     sql-dialect: POSTGRES
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger:
+    enabled: true
+    url: /swagger.yml
