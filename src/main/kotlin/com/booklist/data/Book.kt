@@ -1,4 +1,3 @@
 package com.booklist.data
 
-class Book {
-}
+data class BookRequest(val name: String)

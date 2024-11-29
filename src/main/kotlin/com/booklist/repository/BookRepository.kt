@@ -22,4 +22,16 @@ class BookRepository(private val dsl: DSLContext) {
       .where(nameField.eq(name))
       .fetchOne(nameField)
   }
+
+  fun addBook(name: String): Boolean {
+    return try {
+      dsl.insertInto(table)
+        .set(nameField, name)
+        .execute()
+      true
+    } catch (e: Exception) {
+      e.printStackTrace()
+      false
+    }
+  }
 }
