@@ -1,13 +1,14 @@
 package com.booklist.controller
 
+import com.booklist.repository.BookRepository
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class BookController {
+class BookController(private val bookRepository: BookRepository) {
 
   @GetMapping("/books")
     fun getBooks(): List<String> {
-      return listOf("Book 1", "Book 2", "Book 3")
+      return bookRepository.getBooks()
     }
 }
