@@ -7,7 +7,6 @@ So far this is just a project to carefully review my knowledge of Kotlin. Starti
 
 ## TODO
 
-- Have POST endpoint for book insertion reject if the book is already available
 - Add swagger file for API documentation
 - Configure environment variables to remove hardcoding from application.yml
 - Add tests

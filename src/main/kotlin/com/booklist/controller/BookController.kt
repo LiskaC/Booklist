@@ -31,12 +31,12 @@ class BookController(private val bookRepository: BookRepository) {
   fun addBook(@RequestBody bookRequest: BookRequest): ResponseEntity<String> {
     val bookName = bookRequest.name
 
-    val success = bookRepository.addBook(bookName)
+    val result = bookRepository.addBook(bookName)
 
-    return if (success) {
-      ResponseEntity.status(201).body("$bookName added successfully!")
+    return if (result.success) {
+      ResponseEntity.status(201).body(result.message)
     } else {
-      ResponseEntity.status(500).body("Failed to save $bookName")
+      ResponseEntity.status(500).body(result.message)
     }
   }
 }

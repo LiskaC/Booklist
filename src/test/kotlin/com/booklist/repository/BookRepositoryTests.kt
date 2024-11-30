@@ -13,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -71,21 +72,37 @@ class BookRepositoryTests {
 
   @Test
   fun `should not insert a record if the book name is a blank string`() {
-    bookRepository.addBook("")
-    bookRepository.addBook("  ")
+    val result1 = bookRepository.addBook("")
+    val result2 = bookRepository.addBook("  ")
+
+    assertFalse(result1.success)
+    assertFalse(result2.success)
+    assertEquals("Book name can't be blank", result1.message)
+    assertEquals("Book name can't be blank", result2.message)
 
     val tableSize = dsl.fetchCount(DSL.table("book"))
     assertEquals(0, tableSize)
   }
 
   @Test
-  fun `should returns 'false' if adding a book fails at the database connection point`() {
+  fun `should not insert a record if the book name already exists in the database`() {
+    val result1 = bookRepository.addBook("Death and the Penguin")
+    val result2 = bookRepository.addBook("Death and the Penguin")
+
+    assertTrue(result1.success)
+    assertFalse(result2.success)
+    assertEquals("Death and the Penguin added successfully!", result1.message)
+    assertEquals("'Death and the Penguin' already exists in the database", result2.message)
+  }
+
+  @Test
+  fun `should return error if adding a book fails at the database connection point`() {
     val mockDsl = mockk<DSLContext>()
     val bookRepository = BookRepository(mockDsl)
     val bookTable = DSL.table("book")
     every { mockDsl.insertInto(bookTable) } throws RuntimeException("Database connection failed")
 
     val result = bookRepository.addBook("Sad Book")
-    assertFalse(result)
+    assertFalse(result.success)
   }
 }
