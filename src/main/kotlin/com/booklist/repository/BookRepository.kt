@@ -24,6 +24,10 @@ class BookRepository(private val dsl: DSLContext) {
   }
 
   fun addBook(name: String): Boolean {
+    if (name.isBlank()) {
+      return false
+    }
+
     return try {
       dsl.insertInto(table)
         .set(nameField, name)
