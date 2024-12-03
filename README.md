@@ -11,9 +11,7 @@ record of changes. Until then this will be done purely via commit messages.
 
 ## TODO
 
-- Add swagger file for API documentation
-- Configure environment variables to remove hardcoding from application.yml
-- Add tests
+- Add tests for controller
 
 I'm thinking about the documentation for this project. So far the code is pretty explicit and the test cases I think
 additionally describe the expected behaviour pretty well. Writing code docs for very explicit properties / values feels
