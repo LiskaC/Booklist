@@ -40,4 +40,4 @@ out/
 .kotlin
 
 ### Environment variables ###
-application_local.yml
+application-dev.yml

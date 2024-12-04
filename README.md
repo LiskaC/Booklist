@@ -12,6 +12,9 @@ record of changes. Until then this will be done purely via commit messages.
 ## TODO
 
 - Add tests for controller
+- Add flyway for in-code database migrations
+- Create user authentication system
+- Look into jOOQ codegen
 
 I'm thinking about the documentation for this project. So far the code is pretty explicit and the test cases I think
 additionally describe the expected behaviour pretty well. Writing code docs for very explicit properties / values feels
